@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 
 st.set_page_config(page_title="Centro Culinario", layout="wide")
 
@@ -10,16 +11,17 @@ Descubre nuestro plan de estudios, beneficios y metodología.
 
 st.header("📘 Plan de Estudios")
 st.markdown("""
-- Cocina Básica
-- Cocina Internacional
-- Pastelería
+- Cocina Básica  
+- Cocina Internacional  
+- Pastelería  
 - Nutrición y Manipulación de Alimentos
 """)
 
 st.header("🤖 Chatbot de Inscripciones")
 st.markdown("Puedes resolver tus dudas o iniciar tu inscripción aquí:")
 
-# Incrustar el chatbot de Landbot (iframe)
+# Incrustar el script de Landbot
+landbot_script = """
 <script>
 window.addEventListener('mouseover', initLandbot, { once: true });
 window.addEventListener('touchstart', initLandbot, { once: true });
@@ -27,10 +29,10 @@ var myLandbot;
 function initLandbot() {
   if (!myLandbot) {
     var s = document.createElement('script');
-    s.type = "module"
+    s.type = "module";
     s.async = true;
     s.addEventListener('load', function() {
-      var myLandbot = new Landbot.Livechat({
+      myLandbot = new Landbot.Livechat({
         configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-2971594-YFSU7IQBD0ZX8MJV/index.json',
       });
     });
@@ -40,3 +42,7 @@ function initLandbot() {
   }
 }
 </script>
+"""
+
+# Usar st.components.v1.html para inyectar el script
+components.html(landbot_script, height=0, width=0)
