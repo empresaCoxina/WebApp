@@ -18,10 +18,10 @@ st.markdown("""
 """)
 
 st.header("🤖 Chatbot de Inscripciones")
-st.markdown("Puedes resolver tus dudas o iniciar tu inscripción aquí:")
+st.markdown("Puedes resolver tus dudas o iniciar tu inscripción a través del botón flotante de chat en la esquina inferior de la pantalla.")
 
-# Incrustar el script de Landbot
-landbot_script = """
+# Código JavaScript para Landbot Popup
+landbot_popup_script = """
 <script>
 window.addEventListener('mouseover', initLandbot, { once: true });
 window.addEventListener('touchstart', initLandbot, { once: true });
@@ -32,7 +32,7 @@ function initLandbot() {
     s.type = "module";
     s.async = true;
     s.addEventListener('load', function() {
-      myLandbot = new Landbot.Livechat({
+      myLandbot = new Landbot.Popup({
         configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-2971594-YFSU7IQBD0ZX8MJV/index.json',
       });
     });
@@ -44,5 +44,5 @@ function initLandbot() {
 </script>
 """
 
-# Usar st.components.v1.html para inyectar el script
-components.html(landbot_script, height=0, width=0)
+# Incrustar el script dentro del HTML
+components.html(landbot_popup_script, height=0, width=0)
